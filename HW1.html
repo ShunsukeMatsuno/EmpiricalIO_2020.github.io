@@ -4154,7 +4154,7 @@ summary {
   y_t = \beta_0 + \beta_1 x_i +\varepsilon_i,
 \]</span>
 <ul>
-<li><span class="math inline">\(\varepsilon \sim N(0,1)\)</span></li>
+<li><span class="math inline">\(\varepsilon \sim \mathcal{N}(0,1)\)</span></li>
 <li><span class="math inline">\(N = 1000\)</span></li>
 </ul></li>
 </ul>
@@ -4255,7 +4255,7 @@ NULL</code></pre>
 <h4>(c)</h4>
 <ul>
 <li>Since <span class="math inline">\(\varepsilon \sim N(0,1)\)</span>, the likelihood function is given by <span class="math display">\[
-  L(\beta;y,X)=\prod_{i=1}^{m}\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2}\right)
+  L(\beta;y,X)=\prod_{i=1}^{N}\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2}\right)
 \]</span></li>
 <li>We can ignore the normalizing term for the puropose of optimization, and we take log to make the computation efficient: <span class="math display">\[
   \ln L(\beta;y,X)=-\frac{\sum_{i=1}^{N}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2}
