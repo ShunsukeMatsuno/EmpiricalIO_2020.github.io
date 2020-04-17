@@ -24,5 +24,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Note
 - This website contains my answers to homeworks of Empirical Industrial Organization.
 - R functions are not included in this page.
-    - For the complete R project file, see [this](https://github.com/ShunsukeMatsuno/EmpiricalIO_2020) repository.
+    - For the complete R project file, see [this](https://github.com/ShunsukeMatsuno/EmpiricalIO_2020) private repository.
+    
     
