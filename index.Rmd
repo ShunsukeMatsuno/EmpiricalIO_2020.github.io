@@ -1,7 +1,6 @@
 ---
 title: "index"
 author: "Shunsuke Matsuno"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
@@ -15,3 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
 - [HW3]()
 - [HW4]()
 - [HW5]()
+
+## Personal Information
+- Name: Shunsuke Matsuno
+- Student ID: 29-196070
+- Affiliation: The University of Tokyo, Graduate School of Economics, Second-year master's student
+- Contact: [smatsuno@g.ecc.u-tokyo.ac.jp](mailto:smatsuno@g.ecc.u-tokyo.ac.jp)
+
+## Note
+- This website contains my answers to homeworks of Empirical Industrial Organization.
+- R functions are not included in this page.
+    - For the complete R project file, see [this](https://github.com/ShunsukeMatsuno/EmpiricalIO_2020) repository.
+    
