@@ -4387,6 +4387,9 @@ NULL</code></pre>
 </div>
 <div id="c-1" class="section level4">
 <h4>(c)</h4>
+<ul>
+<li>Under the same distributional assumption as before, the likelihood function is the same except for adding another variable.</li>
+</ul>
 <pre class="r"><code>optim(runif(3), lkhd, X = X, y = y, method = &quot;Nelder-Mead&quot;, control=list(fnscale = -1))</code></pre>
 <pre><code>$par
 [1] 10.57634847 -0.11173988  0.02244649
