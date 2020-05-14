@@ -2078,14 +2078,13 @@ df_share_simulated</code></pre>
   </script>
 </div>
 <ul>
-<li>Using this <span class="math inline">\(\delta\)</span>, we estimate FE model to get <span class="math inline">\(\xi_{jm}^*\)</span>.
+<li>Using this <span class="math inline">\(\delta\)</span>, we regress <span class="math inline">\(\delta_{jm}\)</span> on <span class="math inline">\((1,x)\)</span> to get <span class="math inline">\(\xi_{jm}^*\)</span>.
 <ul>
-<li>In this case, the fixed effect term is just the group mean. _ I bother re-compute contraction. Of course, I can provide the optimal delta in this function.</li>
 <li>The function return the squared sum of <span class="math inline">\(xi\)</span>.</li>
 </ul></li>
 </ul>
 <pre class="r"><code>HW3_compute_xi_squared(theta, delta_init, df_simulated, df_market, tolerance)</code></pre>
-<pre><code>[1] 11.60552</code></pre>
+<pre><code>[1] 452.1345</code></pre>
 <ul>
 <li>Now, we minimize <span class="math inline">\(xi\)</span> to get the parameter <span class="math inline">\(\theta\)</span>.
 <ul>
@@ -2107,7 +2106,7 @@ optim_result_df &lt;- tibble(
 optim_result_df</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["initial_value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["theta"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"0.9253747"},{"1":"1","2":"0.9253747"},{"1":"10","2":"0.9253747"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["initial_value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["theta"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"4.206035"},{"1":"1","2":"4.206035"},{"1":"10","2":"4.206035"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <ul>
@@ -2117,14 +2116,14 @@ optim_result_df</code></pre>
 par_linear &lt;- HW3_compute_linear_params(theta_opt, delta_opt, df_simulated, df_market)
 par_linear</code></pre>
 <pre><code>    (Intercept) characteristics 
-     -1.1104176      -0.2771132 </code></pre>
+     -0.6901010      -0.8975845 </code></pre>
 <ul>
 <li>In sum, we get the following estimation result by plain logit and BLP:</li>
 </ul>
 <p><span class="math display">\[
 \begin{align*}
 \text{plain logit}:\qquad &amp; u_{ijm}=-2.80 + 1.12 x_{j}+\xi_{jm}+\varepsilon_{ijm}\\
-\text{BLP}:\qquad &amp; u_{ijm}= -1.11 +x_{j}\cdot\left(-0.28 +0.925 \nu_{i1m}\right)+\xi_{jm}+\varepsilon_{ijm}
+\text{BLP}:\qquad &amp; u_{ijm}= -0.69 +x_{j}\cdot\left(-0.90 + 4.21 \nu_{i1m}\right)+\xi_{jm}+\varepsilon_{ijm}
 \end{align*}
 \]</span></p>
 </div>
