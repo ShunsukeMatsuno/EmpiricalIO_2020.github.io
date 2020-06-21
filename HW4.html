@@ -1725,7 +1725,7 @@ summary {
 
 <h1 class="title toc-ignore">HW4</h1>
 <h4 class="author">Shunsuke Matsuno (29-196070)</h4>
-<h4 class="date">2020/06/19</h4>
+<h4 class="date">2020/06/21</h4>
 
 </div>
 
@@ -1798,13 +1798,13 @@ df</code></pre>
 <div id="second-step" class="section level2">
 <h2>Second Step</h2>
 <ul>
-<li>The log-likelihood is <span class="math display">\[
+<li>The log-likelihood is given by <span class="math display">\[
 \ln L(\alpha,\beta,\delta) = \sum_{m=1}^{M}\sum_{i=1}^{2}(a_{im} \ln \text{Pr}(a_{im}=1\mid\alpha,\beta,\gamma,\hat{\sigma}_{-i})+(1-a_{im})(1- \ln\text{Pr}(a_{im}=0\mid\alpha,\beta,\gamma,\hat{\sigma}_{-i})).
 \]</span></li>
+<li>The function <code>HW4_lkhd</code> can be foud <a href="https://github.com/ShunsukeMatsuno/EmpiricalIO2020/tree/master/R">here</a>.</li>
 </ul>
 <pre class="r"><code># initial theta
 theta &lt;- c(1, -1, -1)
-
 
 # optimization
 optim_result &lt;- optim(theta, HW4_lkhd, df = df, method = &#39;Nelder-Mead&#39;, control = list(fnscale = -1))
@@ -1852,7 +1852,7 @@ NULL</code></pre>
 optim_result &lt;- optim(theta, HW4_lkhd, df = df, method = &#39;Nelder-Mead&#39;, control = list(fnscale = -1))
 optim_result</code></pre>
 <pre><code>$par
-[1]  0.5220724 -0.6669666 -0.3590744
+[1]  0.5219646 -0.6690073 -0.3565333
 
 $value
 [1] -13587.35
