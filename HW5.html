@@ -1725,7 +1725,7 @@ summary {
 
 <h1 class="title toc-ignore">HW5</h1>
 <h4 class="author">Shunsuke Matsuno (29-196070)</h4>
-<h4 class="date">2020/06/26</h4>
+<h4 class="date">2020/06/27</h4>
 
 </div>
 
@@ -1742,6 +1742,9 @@ summary {
 
 <div id="single-agent-dynamics" class="section level1">
 <h1>Single Agent Dynamics</h1>
+<ul>
+<li>All the functions with prefix <code>HW5_</code> can be found <a href="https://github.com/ShunsukeMatsuno/EmpiricalIO2020/tree/master/R">here</a>.</li>
+</ul>
 <div id="data" class="section level2">
 <h2>Data</h2>
 <ul>
@@ -1790,7 +1793,7 @@ V_{\theta}(s,\varepsilon)=\max\left\{ v(0,s,\varepsilon\mid\theta)+\varepsilon_{
 </ul>
 <pre class="r"><code>set.seed(2020)</code></pre>
 <ul>
-<li>I set the inital parameters as followings.</li>
+<li>We set the inital parameters as followings.</li>
 </ul>
 <pre class="r"><code>alpha &lt;- 2
 beta &lt;- 1
@@ -1798,50 +1801,17 @@ theta_2 &lt;- c(alpha, beta)
 
 delta &lt;- 0.95</code></pre>
 <ul>
-<li>First, I estimate the trainsition matrix.</li>
-<li><code>HW5_estimate_G.R</code> returns <span class="math inline">\(10 \times 5\)</span> matrix, where:
-<ul>
-<li>1st row: the transition probability when the firm take action <span class="math inline">\(a = 0\)</span> with state <span class="math inline">\(s = 1\)</span>.</li>
-<li>2nd row: the transition probability when the firm take action <span class="math inline">\(a = 1\)</span> with state <span class="math inline">\(s = 1\)</span>.</li>
-<li>3rd row: the transition probability when the firm take action <span class="math inline">\(a = 0\)</span> with state <span class="math inline">\(s = 2\)</span>.</li>
-<li>…</li>
-</ul></li>
-</ul>
-<pre class="r"><code>HW5_estimate_G(df)</code></pre>
-<pre><code>               s1          s2          s3          s4           s5
-a0_s1 0.993201206 0.002180745 0.001026233 0.001667629 0.0019241870
-a1_s1 0.403450363 0.592312349 0.001210654 0.002118644 0.0009079903
-a0_s2 0.102559029 0.891571033 0.001780768 0.002638174 0.0014509959
-a1_s2 0.104465710 0.293195109 0.598086124 0.002923977 0.0013290803
-a0_s3 0.001899387 0.101155913 0.892494709 0.002170728 0.0022792641
-a1_s3 0.002423916 0.097225963 0.304066792 0.593590089 0.0026932400
-a0_s4 0.001863202 0.002108360 0.095954891 0.898112282 0.0019122334
-a1_s4 0.002834869 0.002126152 0.099220411 0.298369950 0.5974486180
-a0_s5 0.002369077 0.002244389 0.001683292 0.103241895 0.8904613466
-a1_s5 0.001275510 0.001275510 0.005102041 0.094387755 0.8979591837</code></pre>
-<ul>
-<li>This is the estimated transition matrix of <span class="math display">\[
-\begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
-1-\gamma &amp; \gamma &amp; 0 &amp; 0 &amp; 0\\
-\kappa &amp; 1-\kappa &amp; 0 &amp; 0 &amp; 0\\
-\kappa &amp; 1-\kappa-\gamma &amp; \gamma &amp; 0 &amp; 0\\
-0 &amp; \kappa &amp; 1-\kappa &amp; 0 &amp; 0\\
-0 &amp; \kappa &amp; 1-\kappa-\gamma &amp; \gamma &amp; 0\\
-0 &amp; 0 &amp; \kappa &amp; 1-\kappa &amp; 0\\
-0 &amp; 0 &amp; \kappa &amp; 1-\kappa-\gamma &amp; \gamma\\
-0 &amp; 0 &amp; 0 &amp; \kappa &amp; 1-\kappa\\
-0 &amp; 0 &amp; 0 &amp; \kappa &amp; 1-\kappa
-\end{pmatrix}
+<li>We estimate <span class="math inline">\(\theta_1 = (\kappa, \gamma)\)</span> by MLE, where the likelihood function is <span class="math display">\[
+\sum \log  P(s&#39;\mid a,s;\theta_1)
 \]</span></li>
-<li>I estimate <span class="math inline">\(\theta_1 = (\kappa, \gamma)\)</span> by mean of each corresponding element of the estimate transition matrix.</li>
 </ul>
-<pre class="r"><code>theta_1_est &lt;- HW5_estimate_theta_1(df)
-theta_1_est</code></pre>
+<pre class="r"><code>theta_1 &lt;- HW5_estimate_theta_1(df)
+theta_1</code></pre>
 <pre><code>$kappa_est
-[1] 0.09977645
+[1] 0.09794411
 
 $gamma_est
-[1] 0.5953593</code></pre>
+[1] 0.5933892</code></pre>
 <ul>
 <li><code>HW_5_compute_PI.R</code> computes payoff for each pair of <span class="math inline">\((a,s)\)</span>.</li>
 </ul>
@@ -1878,11 +1848,11 @@ EV_{\theta}(a,s) &amp; =E_{s&#39;,\varepsilon&#39;\mid a,s}\max_{a\in\{0,1\}}\le
 <pre class="r"><code>EV_est &lt;- HW5_compute_EV(theta_2, delta, df)
 EV_est</code></pre>
 <pre><code>         a0       a1
-s1 49.37035 52.83744
-s2 54.62199 57.50815
-s3 59.54565 61.59092
-s4 63.09676 64.27520
-s5 65.20618 65.23309</code></pre>
+s1 39.39487 42.76451
+s2 44.34825 47.19882
+s3 49.36497 51.44171
+s4 53.03408 54.18535
+s5 55.02136 54.97359</code></pre>
 <ul>
 <li><code>HW5_compute_ccp</code> computes EV and then computes choice probability by</li>
 </ul>
@@ -1892,16 +1862,16 @@ P(a=1\mid s;\theta)=\frac{\exp(\pi^{m}(1,s)+\delta EV_{\theta}(1.s))}{\exp(\pi^{
 <pre class="r"><code>ccp &lt;- HW5_compute_ccp(theta_2, delta, df)
 ccp</code></pre>
 <pre><code>           a0        a1
-s1 0.09164368 0.9083563
-s2 0.14907779 0.8509222
-s3 0.28029250 0.7197075
-s4 0.47015794 0.5298421
-s5 0.72600148 0.2739985</code></pre>
+s1 0.09964653 0.9003535
+s2 0.15341694 0.8465831
+s3 0.27430254 0.7256975
+s4 0.47659013 0.5234099
+s5 0.73988836 0.2601116</code></pre>
 <ul>
 <li><code>HW5_compute_likelihood.R</code> computes likelihood.</li>
 </ul>
 <pre class="r"><code>HW5_compute_likelihood(theta_2, delta, df)</code></pre>
-<pre><code>[1] -115036.9</code></pre>
+<pre><code>[1] -113206.6</code></pre>
 <ul>
 <li>Finally, we optimize w.r.t. <span class="math inline">\(\theta_2\)</span>.</li>
 </ul>
@@ -1961,6 +1931,7 @@ NULL</code></pre>
 \hat{\alpha}=0.54,\hat{\beta}=2.98,\hat{\kappa}=0.10,\hat{\gamma}=0.60
 \]</span></li>
 </ul>
+<p><br><br><br></p>
 </div>
 </div>
 
